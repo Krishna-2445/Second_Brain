@@ -1,0 +1,156 @@
+{
+  "languageModel": {
+    "intents": [
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": []
+      },
+      {
+        "name": "assignment",
+        "samples": [
+          "how does my schedule look",
+          "schedule",
+          "exam",
+          "what is next"
+        ],
+        "slots": []
+      },
+      {
+        "name": "non_vegan_chef",
+        "samples": [
+          "Non vegetarian food",
+          "Non vegetarian dishes",
+          "Non vegetarian dinner recepies",
+          "Non vegetarian lunch recepies"
+        ],
+        "slots": []
+      },
+      {
+        "name": "randomFact",
+        "samples": [
+          "fact",
+          "random fact"
+        ],
+        "slots": []
+      },
+      {
+        "name": "setAlarm",
+        "samples": [
+          "Good night",
+          "Sweet dreams"
+        ],
+        "slots": []
+      },
+      {
+        "name": "solve",
+        "samples": [
+          "solve a puzzle",
+          "puzzle"
+        ],
+        "slots": [
+          {
+            "name": "logical_unit_name",
+            "type": "AMAZON.Author",
+            "samples": [
+              "{logical_unit_name}"
+            ]
+          },
+          {
+            "name": "logical_unit_qty",
+            "type": "AMAZON.Author"
+          },
+          {
+            "name": "logical_unit_type",
+            "type": "AMAZON.Author"
+          }
+        ]
+      },
+      {
+        "name": "vegan_chef",
+        "samples": [
+          "vegan food",
+          "vegan and gluten free food",
+          "vegan receipes ",
+          "vegan and gluten free receipes for lunch ",
+          "vegan and gluten free dinner receipes "
+        ],
+        "slots": []
+      }
+    ],
+    "invocationName": "second brain"
+  },
+  "prompts": [
+    {
+      "id": "Confirm.Intent-solve",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "ok ,you gave {logical_unit_name} of value {logical_unit_qty} "
+        }
+      ]
+    },
+    {
+      "id": "Elicit.Intent-solve.IntentSlot-logical_unit_name",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "can you repeat the logical unit again"
+        }
+      ]
+    },
+    {
+      "id": "Confirm.Intent-solve.IntentSlot-logical_unit_name",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "ok"
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "intents": [
+      {
+        "name": "solve",
+        "confirmationRequired": true,
+        "prompts": {
+          "confirmation": "Confirm.Intent-solve"
+        },
+        "slots": [
+          {
+            "name": "logical_unit_name",
+            "type": "AMAZON.Author",
+            "elicitationRequired": true,
+            "confirmationRequired": true,
+            "prompts": {
+              "elicitation": "Elicit.Intent-solve.IntentSlot-logical_unit_name",
+              "confirmation": "Confirm.Intent-solve.IntentSlot-logical_unit_name"
+            }
+          },
+          {
+            "name": "logical_unit_qty",
+            "type": "AMAZON.Author",
+            "elicitationRequired": false,
+            "confirmationRequired": false,
+            "prompts": {}
+          },
+          {
+            "name": "logical_unit_type",
+            "type": "AMAZON.Author",
+            "elicitationRequired": false,
+            "confirmationRequired": false,
+            "prompts": {}
+          }
+        ]
+      }
+    ]
+  }
+}
